@@ -1,0 +1,243 @@
+/// Layout Mixins
+/// 
+$columnWidth: $bodyWidth/$columns;
+
+// Calculate width of element
+@function gridWidth($size) {
+    @return percentage(($columnWidth * $size) / $bodyWidth); 
+}
+
+/// Responsive padding for columns
+/// @group layout
+/// @param {size} padding size
+@mixin padding(){   
+    box-sizing: border-box;
+
+    @include bp(large-desktop) {
+        padding:0 $gutterLargeDesktop/2 0;
+    }
+
+    @include bp(desktop) {
+        padding:0 $gutterDesktop/2 0;
+    }
+
+    @include bp(small-desktop) {
+        padding:0 $gutterSmallDesktop/2 0;
+    }
+
+    @include bp(tablet) {
+        padding:0 $gutterTablet/2 0;
+    }
+
+    @include bp(mobile) {
+        padding:0 $gutterMobile/2 0;
+    }
+}
+
+/// Table Cell Markup for Block 
+/// Useful for when you need to vertically align the contents of a module 
+/// @group layout
+/// @param {height} height size
+@mixin tableCell($height, $valign:top){
+
+    .table {
+        display: table;
+        width: 100%;
+        height: $height;
+        
+        .table-cell {
+            position: relative;
+            vertical-align: $valign;        
+            display: table-cell;
+        }
+    }
+}
+
+/// Calculate grid size
+/// @group layout
+/// @param {size} grid size
+@mixin grid($size) {
+    box-sizing: border-box;
+    float:left;
+    width: gridWidth($size);
+    @include padding();
+}
+
+
+/// Layout Blocks Mixin
+/// Controls all page layout blocks - harnesses table-cell to achieve consistent height elems.
+/// @group layout
+/// @param {number} $blocks - Set the number of blocks the layout will be divided into
+
+@mixin layoutBlocks($blocks) {
+    $gridSize: $columns/$blocks;
+    max-width: $bodyWidth;
+    margin: 0 auto;
+    margin-bottom: $spacer-s;
+
+    padding: 0 5.35%; // Yannick's magic number
+    
+    @include bp(mobile) {
+        padding: 0 $gutterTablet $gutterTablet;
+        margin-bottom: $gutterTablet;
+
+        &.no-padding {
+            padding: 0;
+        }
+        &.no-spacer {
+            margin-bottom: 0;
+        }
+    }
+
+    // Use Spacers - use MARGIN BOTTOM
+    // Spacing (between containers vertically)
+    &.spacer-none {
+        margin-bottom: 0;
+    }
+    &.mobile-spacer-none {
+        @include bp(mobile){
+            margin-bottom: 0;
+            .container {
+                > .col-container {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }    
+    &.spacer-S {
+        margin-bottom: $spacer-s;
+    }
+    &.spacer-m {
+        margin-bottom: $spacer-m;
+    } 
+    &.spacer-l {
+        margin-bottom: $spacer-l;
+    }
+    &.spacer-xl {
+        margin-bottom: $spacer-xl;
+    }
+
+
+    // Only use these classes if required.
+    // As a rule only use on the first element of a page. 
+    // All other spacing should be on the bottom of elements
+
+    &.padding-top-s {
+        padding-top: $padding-s;
+    }
+
+    &.padding-top-m {
+        padding-top: $padding-m;
+    }
+
+    &.padding-top-l {
+        padding-top: $padding-l;
+    }
+
+    
+    // Widths
+    &.full-width {
+        max-width: none;
+        padding: 0;
+    }
+    &.body-width {
+        max-width: $bodyWidth;
+    }
+    &.reading-width {
+        margin-left:auto;
+        margin-right:auto;
+
+        .container {
+            padding-right: gridWidth(2);
+            padding-left: gridWidth(2);
+
+            @include bp('mobile') {
+                padding: 0 gridWidth(0);
+            }
+        }
+    }
+    &.col-10-width {
+        margin-left:auto;
+        margin-right:auto;
+
+        .container {
+            padding-right: gridWidth(1);
+            padding-left: gridWidth(1);
+
+            @include bp('mobile') {
+                padding: 0 gridWidth(0);
+            }
+        }
+    }
+
+
+    &.v-align--middle {
+        .container > .col-container {
+            vertical-align: middle;
+        }
+    }
+
+    &.v-align--bottom {
+        .container > .col-container {
+            vertical-align: bottom;
+        }
+    }    
+
+    &.no-padding > .container > .col-container {
+        padding: 0;
+    }
+
+    &.mobile-no-padding {
+        @include bp(mobile){
+            padding: 0;
+            > .container > .col-container {
+                padding: 0;
+            }            
+        }
+    } 
+
+    // Columns
+    .container > .col-container {
+        width: gridWidth($gridSize);
+        display: table-cell;
+        vertical-align: top;
+        @include padding();
+        
+        &.span-2 {
+            width: gridWidth(2);
+        }
+        &.span-3 {
+            width: gridWidth(3);
+        }
+        &.span-4 {
+            width: gridWidth(4);
+        }
+        &.span-5 {
+            width: gridWidth(5);
+        }
+        &.span-6 {
+            width: gridWidth(6);
+        }
+        &.span-7 {
+            width: gridWidth(7);
+        }
+        &.span-8 {
+            width: gridWidth(8);
+        }
+        &.span-9 {
+            width: gridWidth(9);
+        }
+        &.span-10 {
+            width: gridWidth(10);
+        }
+        &.span-11 {
+            width: gridWidth(11);
+        }        
+
+        @include bp('mobile') {
+            width: auto !important;
+            display: block;
+            margin-bottom: $gutterTablet;
+        }
+    }
+}

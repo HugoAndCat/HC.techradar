@@ -1,0 +1,97 @@
+
+
+/// Columns - number of columns to use for the grid
+/// @group dimensions
+/// @type dimension
+$columns: 12;
+
+/// Gutter - desktop gutter width
+/// @group dimensions
+/// @type dimension
+$gutterLargeDesktop: 2.8rem;
+
+/// Gutter Desktop - desktop gutter width
+/// @group dimensions
+/// @type dimension
+$gutterDesktop: 2.8rem;
+
+/// Gutter Small Desktop - small desktop gutter width
+/// @group dimensions
+/// @type dimension
+$gutterSmallDesktop: 2.8rem;
+
+/// Gutter Tablet - tablet gutter width
+/// @group dimensions
+/// @type dimension
+$gutterTablet: 1.6rem;
+
+/// Gutter Mobile - mobile gutter width
+/// @group dimensions
+/// @type dimension
+$gutterMobile: 1.2rem;
+
+/// Reading Width - reading width
+/// @group dimensions
+/// @type dimension
+$readingWidth: 57.8rem + $gutterLargeDesktop/2;
+
+/// Body Width - body width
+/// @group dimensions
+/// @type dimension
+$bodyWidth: 108.0rem;
+
+
+/// Spacer small (vertical spacing - using margin-bottom)
+/// @group dimensions
+/// @type dimension
+$spacer-s: 3.0rem;
+
+/// Spacer medium (vertical spacing - using margin-bottom)
+/// @group dimensions
+/// @type dimension
+$spacer-m: 4.0rem;
+
+/// Spacer large (vertical spacing - using margin-bottom)
+/// @group dimensions
+/// @type dimension
+$spacer-l: 8.0rem;
+
+/// Spacer extra large (vertical spacing - using margin-bottom)
+/// @group dimensions
+/// @type dimension
+$spacer-xl: 16.0rem;
+
+
+
+/// padding small (vertical spacing - using padding-top)
+/// @group dimensions
+/// @type dimension
+$padding-s: 3.5rem;
+
+/// padding medium (vertical spacing - using padding-top)
+/// @group dimensions
+/// @type dimension
+$padding-m: 5.5rem;
+
+/// padding large (vertical spacing - using padding-top)
+/// @group dimensions
+/// @type dimension
+$padding-l: 11.0rem;
+
+
+/// Base font size - spacing and widths defined in REM. 
+/// Use this as base, all REM units are this divided by 10 - eg 1.2rem = 12px.
+/// 
+/// @group units
+/// @type unit
+$font-size:                             10px;
+
+/// Base line height
+/// @group units
+/// @type unit
+$line-height-body:                      1.5;
+
+/// Heading line height
+/// @group units
+/// @type unit
+$line-height-heading:                   1;

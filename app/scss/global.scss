@@ -1,0 +1,26 @@
+
+// Utils
+@import "utilities/__import.scss";
+
+// Variables
+@import "variables/__import.scss";
+
+// Mixins
+@import "mixins/__import.scss";
+
+// Components
+@import "components/__import.scss";
+
+// Elements
+@import "elements/__import.scss";
+
+// Modules
+@import "modules/__import.scss";
+
+// Views
+@import "views/__import.scss";
+
+svg {
+    display: block;
+    margin: auto;
+}

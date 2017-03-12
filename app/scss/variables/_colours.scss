@@ -1,0 +1,43 @@
+/// Colour variables used in the original build
+/// @group colors
+/// @type color
+/// Colours are named here: http://chir.ag/projects/name-that-color/
+
+$colors: (
+  "RM-red": #da202a,
+  "positive-blue": #0892cb,
+  "go-green": #62a431,
+  "deep-green": #088578,
+  "dynamic-yellow": #fdda24,
+
+  "white": #fff,
+  "background-grey": #f4f4f3,
+  "recess-grey": #c1c6c8,
+  "strong-grey": #53535a,
+  "dark-grey": #404044,
+  "black": #2a2a2d
+);
+
+
+$styleGuideColors: (
+    "RM-red": #da202a,
+    "recess-grey": #c1c6c8,
+    "dark-grey": #404044,
+);
+
+// Colour modifiers
+// 
+@each $item, $bgcolour in $colors {
+  .text--#{$item} {
+    color: $bgcolour;
+  }
+}
+
+@each $item, $bgcolour in $colors {
+  .bg--#{$item} {
+    background-color: $bgcolour;
+  }
+  .bg--#{$item}--darken {
+    background-color: darken($bgcolour, 10%);
+  }
+}

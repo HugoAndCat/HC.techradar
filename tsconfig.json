@@ -1,0 +1,13 @@
+{
+    "files": [
+        "app/ts/*.ts"
+    ],
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5"
+    },
+    "include": [
+        "app/ts/*.ts",
+        "custom-typings/**/*.d.ts"
+    ]
+}

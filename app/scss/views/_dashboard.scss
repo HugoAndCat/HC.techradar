@@ -1,0 +1,9 @@
+body.member-dashboard {
+    .page-wrapper {
+        margin-bottom: 0;
+
+        @include bp(mobile) {
+            margin-bottom: -13.4rem;
+        }
+    }
+}

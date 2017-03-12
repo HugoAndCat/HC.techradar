@@ -1,0 +1,277 @@
+
+html {
+    height: 100%;
+    font-size: $font-size;
+    @include bp(mobile){
+        font-size: 8px;
+    }
+}
+body {
+    height: 100%;
+    font-size: 1.8rem;
+    line-height: $line-height-body;
+    color: map-get($colors, 'strong-grey');
+    @include din('regular');
+}
+
+.page-wrapper {
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+    z-index: 100;
+    background: white;
+    margin-bottom: -13.4rem;  
+
+    &:after {
+        content: "";
+        display: block;
+        height: 13.4rem;
+    } 
+}
+
+.container {
+    display: table;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    @include bp('mobile') {
+        display: block;
+    }
+}
+
+// setup desktop layouts
+.row-columns--1 {
+    @include layoutBlocks(1);   
+    
+
+    .container > .col-container {
+        
+        // override for single column layout
+        &.span-2 {
+            padding-right: gridWidth(10);
+        }
+        &.span-3 {
+            padding-right: gridWidth(9);
+        }
+        &.span-4 {
+            padding-right: gridWidth(8);
+        }
+        &.span-5 {
+            padding-right: gridWidth(7);
+        }
+        &.span-6 {
+            padding-right: gridWidth(6);
+        }
+        &.span-7 {
+            padding-right: gridWidth(5);
+        }
+        &.span-8 {
+            padding-right: gridWidth(4);
+        }
+        &.span-9 {
+            padding-right: gridWidth(3);
+        }
+        &.span-10 {
+            padding-right: gridWidth(2);
+        }
+        &.span-11 {
+            padding-right: gridWidth(1);
+        }
+
+    }       
+}
+
+.row-columns--2 {
+    @include layoutBlocks(2);
+}
+
+.row-columns--3 {
+    @include layoutBlocks(3);   
+}
+
+.row-columns--4 {
+    @include layoutBlocks(4);
+}
+
+.row-columns--6 {
+    @include layoutBlocks(6);
+
+    @include bp(tablet) {
+        .container {
+            display: table;
+            .col-container {
+                width: 33.3333% !important;
+                display: block;
+                float: left;
+            }
+        }
+    }
+    
+    @include bp(mobile) {
+        .container {
+            display: table;
+            .col-container {
+                width: 50% !important;
+                display: block;
+                float: left;
+            }
+        }
+    }
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+
+.hide-on-desktop {
+  display: none !important;
+  @include bp(mobile) {
+    display: block !important;
+  }
+}
+
+.hide-on-mobile-tablet {
+  @include bp(tablet) {
+    display: none !important;
+  }
+}
+
+.hide-on-mobile {
+  @include bp(mobile) {
+    display: none !important;
+  }
+}
+
+
+.layout-split--left {
+    background-color: map-get($colors, 'RM-red');
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    padding: 0 0 0 10.7%; // Yannick's magic number (just on the left this time and doubled because we are in a half size wrapper)
+
+    @include tableCell(100%, middle);
+
+
+    // @include vbp(large) {
+    //     min-height: 1000px;
+    // }
+
+    // @include vbp(medium) {
+    //     min-height: 900px;
+    // }
+
+    // @include vbp(small) {
+    //     min-height: 700px;
+    // }
+
+    // @include vbp(x-small) {
+    //     min-height: 600px;
+    // }
+
+    @include bp(mobile) {
+        position: static;
+        padding: 0 1.6rem;
+        height: 200px !important;
+        min-height: auto !important;
+    }
+
+
+    .table {
+        float: right;
+        max-width: $bodyWidth/2;
+        
+        @include bp(mobile) {
+            float: none;
+        }
+    }
+    .table-cell {
+        @include padding();
+    }
+}
+.layout-split--right {
+    background-color: map-get($colors, 'background-grey');
+    height: 100%;
+    display: block;
+    // position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    padding: 0 10.7% 0 0; // Yannick's magic number (just on the left this time and doubled because we are in a half size row)
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+
+    @include tableCell(100%, bottom);
+
+    // @include vbp(large) {
+    //     min-height: 1000px;
+    // }
+
+    // @include vbp(medium) {
+    //     min-height: 900px;
+    // }
+
+    // @include vbp(small) {
+    //     min-height: 700px;
+    // }
+
+    // @include vbp(x-small) {
+    //     min-height: 600px;
+    // }
+
+
+    @include bp(mobile) {
+        min-height: 500px;
+        position: static;
+        padding: 0 1.6rem;
+        height: auto !important;
+        overflow: visible;
+    }
+
+    .table {
+        max-width: $bodyWidth/2;
+        
+        @include bp(mobile) {
+            float: none;
+        }
+    }
+    .table-cell {
+        @include padding();
+    }
+}
+
+
+.height-100pc {
+    position: absolute;
+    width: 100%;
+    top: 96px;
+    bottom: 0 !important;
+    left: 0;
+    right: 0;
+    height: 100%;
+    .container {
+        height: 100%;
+    }
+
+    @include bp(mobile) {
+        position: static;
+    }
+}

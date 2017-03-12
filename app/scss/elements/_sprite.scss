@@ -1,0 +1,11 @@
+.icon {
+  display: inline-block;
+}
+
+.icon-facebook {
+  @include retina-sprite($sprite-facebook-group);
+}
+
+.icon-twitter {
+  @include retina-sprite($sprite-twitter-group);
+}

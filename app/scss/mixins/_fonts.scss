@@ -1,0 +1,160 @@
+
+
+/// Chevin Font mixin
+/// @group fonts
+/// @param {string | 'regular'} $type - light | medium | demibold | bold | thin | extrabold | light-italic | medium-italic | demibold-italic | bold-italic | thin-italic | extrabold-italic
+
+@mixin chevin($type){
+  @if $type == 'light' {
+    font-family: 'Chevin-Light', Arial, sans-serif;
+  }
+  @else if $type == 'medium' {
+    font-family: 'Chevin-Medium', Arial, sans-serif;
+  }
+  @else if $type == 'demibold' {
+    font-family: 'Chevin-DemiBold', Arial, sans-serif;
+  }
+  @else if $type == 'bold' {
+    font-family: 'Chevin-Bold', Arial, sans-serif;;
+  }
+  @else if $type == 'thin' {
+    font-family: 'Chevin-Thin', Arial, sans-serif;
+  }
+  @else if $type == 'extrabold' {
+    font-family: 'Chevin-ExtraBold', Arial, sans-serif;
+  } 
+  @if $type == 'light-italic' {
+    font-family: 'Chevin-LightItalic', Arial, sans-serif;
+  }
+  @else if $type == 'medium-italic' {
+    font-family: 'Chevin-MediumItalic', Arial, sans-serif;
+  }
+  @else if $type == 'demibold-italic' {
+    font-family: 'Chevin-DemiBoldItalic', Arial, sans-serif;
+  }
+  @else if $type == 'bold-italic' {
+    font-family: 'Chevin-BoldItalic', Arial, sans-serif;;
+  }
+  @else if $type == 'thin-italic' {
+    font-family: 'Chevin-ThinItalic', Arial, sans-serif;
+  }
+  @else if $type == 'extrabold-italic' {
+    font-family: 'Chevin-ExtraBoldItalic', Arial, sans-serif;
+  }    
+
+}
+
+/// DIN Font mixin
+/// @group fonts
+/// @param {string | 'regular'} $type - regular | italic | bold
+
+
+@mixin din($type){
+  @if $type == 'italic' {
+    font-family: 'DIN Italic', Arial, sans-serif;
+  }
+  @else if $type == 'regular' {
+    font-family: 'DIN Next w01', Arial, sans-serif;
+  }
+  @else if $type == 'bold' {
+    font-family: 'DIN Bold', Arial, sans-serif;
+  }
+ 
+}
+
+
+@font-face {
+    font-family: "DIN Next W01";
+    src: url(/dist/fonts/DIN_Next_W01/DIN_Next_W01.eot);
+    src: url(/dist/fonts/DIN_Next_W01/DIN_Next_W01.eot) format("eot"), url(/dist/fonts/DIN_Next_W01/DIN_Next_W01.woff) format("woff"), url(/dist/fonts/DIN_Next_W01/DIN_Next_W01.ttf) format("truetype"), url(/dist/fonts/DIN_Next_W01/DIN_Next_W01.svg) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "DIN Italic";
+    src: url(/dist/fonts/DIN_Italic/DIN_Italic.eot);
+    src: url(/dist/fonts/DIN_Italic/DIN_Italic.eot) format("eot"), url(/dist/fonts/DIN_Italic/DIN_Italic.woff) format("woff"), url(/dist/fonts/DIN_Italic/DIN_Italic.ttf) format("truetype"), url(/dist/fonts/DIN_Italic/DIN_Italic.svg) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "DIN Bold";
+    src: url(/dist/fonts/DIN_Bold/DIN_Bold.eot);
+    src: url(/dist/fonts/DIN_Bold/DIN_Bold.eot) format("eot"), url(/dist/fonts/DIN_Bold/DIN_Bold.woff) format("woff"), url(/dist/fonts/DIN_Bold/DIN_Bold.ttf) format("truetype"), url(/dist/fonts/DIN_Bold/DIN_Bold.svg) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: 'Chevin-LightItalic';
+    src: url(/dist/fonts/Chevin_Light_Italic/Chevin_Light_Italic.eot);
+    src: url(/dist/fonts/Chevin_Light_Italic/Chevin_Light_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Light_Italic/Chevin_Light_Italic.woff) format("woff"), url(/dist/fonts/Chevin_Light_Italic/Chevin_Light_Italic.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-ExtraBoldItalic';
+    src: url(/dist/fonts/Chevin_ExtraBold_Italic/Chevin_ExtraBold_Italic.eot);
+    src: url(/dist/fonts/Chevin_ExtraBold_Italic/Chevin_ExtraBold_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_ExtraBold_Italic/Chevin_ExtraBold_Italic.woff) format("woff"), url(/dist/fonts/Chevin_ExtraBold_Italic/Chevin_ExtraBold_Italic.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-ExtraBold';
+    src: url(/dist/fonts/Chevin_ExtraBold/Chevin_ExtraBold.eot);
+    src: url(/dist/fonts/Chevin_ExtraBold/Chevin_ExtraBold.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_ExtraBold/Chevin_ExtraBold.woff) format("woff"), url(/dist/fonts/Chevin_ExtraBold/Chevin_ExtraBold.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-ThinItalic';
+    src: url(/dist/fonts/Chevin_Thin_Italic/Chevin_Thin_Italic.eot);
+    src: url(/dist/fonts/Chevin_Thin_Italic/Chevin_Thin_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Thin_Italic/Chevin_Thin_Italic.woff) format("woff"), url(/dist/fonts/Chevin_Thin_Italic/Chevin_Thin_Italic.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-Medium';
+    src: url(/dist/fonts/Chevin_Medium/Chevin_Medium.eot);
+    src: url(/dist/fonts/Chevin_Medium/Chevin_Medium.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Medium/Chevin_Medium.woff) format("woff"), url(/dist/fonts/Chevin_Medium/Chevin_Medium.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-Light';
+    src: url(/dist/fonts/Chevin_Light/Chevin_Light.eot);
+    src: url(/dist/fonts/Chevin_Light/Chevin_Light.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Light/Chevin_Light.woff) format("woff"), url(/dist/fonts/Chevin_Light/Chevin_Light.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-Thin';
+    src: url(/dist/fonts/Chevin_Thin/Chevin_Thin.eot);
+    src: url(/dist/fonts/Chevin_Thin/Chevin_Thin.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Thin/Chevin_Thin.woff) format("woff"), url(/dist/fonts/Chevin_Thin/Chevin_Thin.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-Bold';
+    src: url(/dist/fonts/Chevin_Bold/Chevin_Bold.eot);
+    src: url(/dist/fonts/Chevin_Bold/Chevin_Bold.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Bold/Chevin_Bold.woff) format("woff"), url(/dist/fonts/Chevin_Bold/Chevin_Bold.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-BoldItalic';
+    src: url(/dist/fonts/Chevin_Bold_Italic/Chevin_Bold_Italic.eot);
+    src: url(/dist/fonts/Chevin_Bold_Italic/Chevin_Bold_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Bold_Italic/Chevin_Bold_Italic.woff) format("woff"), url(/dist/fonts/Chevin_Bold_Italic/Chevin_Bold_Italic.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-MediumItalic';
+    src: url(/dist/fonts/Chevin_Medium_Italic/Chevin_Medium_Italic.eot);
+    src: url(/dist/fonts/Chevin_Medium_Italic/Chevin_Medium_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_Medium_Italic/Chevin_Medium_Italic.woff) format("woff"), url(/dist/fonts/Chevin_Medium_Italic/Chevin_Medium_Italic.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-DemiBold';
+    src: url(/dist/fonts/Chevin_DemiBold/Chevin_DemiBold.eot);
+    src: url(/dist/fonts/Chevin_DemiBold/Chevin_DemiBold.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_DemiBold/Chevin_DemiBold.woff) format("woff"), url(/dist/fonts/Chevin_DemiBold/Chevin_DemiBold.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: 'Chevin-DemiBoldItalic';
+    src: url(/dist/fonts/Chevin_DemiBold_Italic/Chevin_DemiBold_Italic.eot);
+    src: url(/dist/fonts/Chevin_DemiBold_Italic/Chevin_DemiBold_Italic.eot?#iefix) format("embedded-opentype"), url(/dist/fonts/Chevin_DemiBold_Italic/Chevin_DemiBold_Italic.woff) format("woff"), url(/dist/fonts/Chevin_DemiBold_Italic/Chevin_DemiBold_Italic.ttf) format("truetype")
+}

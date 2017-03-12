@@ -1,0 +1,202 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$sprite-facebook-name: 'sprite-facebook';
+$sprite-facebook-x: 0px;
+$sprite-facebook-y: 0px;
+$sprite-facebook-offset-x: 0px;
+$sprite-facebook-offset-y: 0px;
+$sprite-facebook-width: 256px;
+$sprite-facebook-height: 256px;
+$sprite-facebook-total-width: 512px;
+$sprite-facebook-total-height: 512px;
+$sprite-facebook-image: '/dist/img/sprite.png';
+$sprite-facebook: (0px, 0px, 0px, 0px, 256px, 256px, 512px, 512px, '/dist/img/sprite.png', 'sprite-facebook', );
+$sprite-linkedin-name: 'sprite-linkedin';
+$sprite-linkedin-x: 256px;
+$sprite-linkedin-y: 0px;
+$sprite-linkedin-offset-x: -256px;
+$sprite-linkedin-offset-y: 0px;
+$sprite-linkedin-width: 256px;
+$sprite-linkedin-height: 256px;
+$sprite-linkedin-total-width: 512px;
+$sprite-linkedin-total-height: 512px;
+$sprite-linkedin-image: '/dist/img/sprite.png';
+$sprite-linkedin: (256px, 0px, -256px, 0px, 256px, 256px, 512px, 512px, '/dist/img/sprite.png', 'sprite-linkedin', );
+$sprite-twitter-name: 'sprite-twitter';
+$sprite-twitter-x: 0px;
+$sprite-twitter-y: 256px;
+$sprite-twitter-offset-x: 0px;
+$sprite-twitter-offset-y: -256px;
+$sprite-twitter-width: 256px;
+$sprite-twitter-height: 256px;
+$sprite-twitter-total-width: 512px;
+$sprite-twitter-total-height: 512px;
+$sprite-twitter-image: '/dist/img/sprite.png';
+$sprite-twitter: (0px, 256px, 0px, -256px, 256px, 256px, 512px, 512px, '/dist/img/sprite.png', 'sprite-twitter', );
+$sprite-facebook-2x-name: 'sprite-facebook@2x';
+$sprite-facebook-2x-x: 0px;
+$sprite-facebook-2x-y: 0px;
+$sprite-facebook-2x-offset-x: 0px;
+$sprite-facebook-2x-offset-y: 0px;
+$sprite-facebook-2x-width: 512px;
+$sprite-facebook-2x-height: 512px;
+$sprite-facebook-2x-total-width: 1024px;
+$sprite-facebook-2x-total-height: 1024px;
+$sprite-facebook-2x-image: 'sprite@2x.png';
+$sprite-facebook-2x: (0px, 0px, 0px, 0px, 512px, 512px, 1024px, 1024px, 'sprite@2x.png', 'sprite-facebook@2x', );
+$sprite-linkedin-2x-name: 'sprite-linkedin@2x';
+$sprite-linkedin-2x-x: 512px;
+$sprite-linkedin-2x-y: 0px;
+$sprite-linkedin-2x-offset-x: -512px;
+$sprite-linkedin-2x-offset-y: 0px;
+$sprite-linkedin-2x-width: 512px;
+$sprite-linkedin-2x-height: 512px;
+$sprite-linkedin-2x-total-width: 1024px;
+$sprite-linkedin-2x-total-height: 1024px;
+$sprite-linkedin-2x-image: 'sprite@2x.png';
+$sprite-linkedin-2x: (512px, 0px, -512px, 0px, 512px, 512px, 1024px, 1024px, 'sprite@2x.png', 'sprite-linkedin@2x', );
+$sprite-twitter-2x-name: 'sprite-twitter@2x';
+$sprite-twitter-2x-x: 0px;
+$sprite-twitter-2x-y: 512px;
+$sprite-twitter-2x-offset-x: 0px;
+$sprite-twitter-2x-offset-y: -512px;
+$sprite-twitter-2x-width: 512px;
+$sprite-twitter-2x-height: 512px;
+$sprite-twitter-2x-total-width: 1024px;
+$sprite-twitter-2x-total-height: 1024px;
+$sprite-twitter-2x-image: 'sprite@2x.png';
+$sprite-twitter-2x: (0px, 512px, 0px, -512px, 512px, 512px, 1024px, 1024px, 'sprite@2x.png', 'sprite-twitter@2x', );
+$spritesheet-width: 512px;
+$spritesheet-height: 512px;
+$spritesheet-image: '/dist/img/sprite.png';
+$spritesheet-sprites: ($sprite-facebook, $sprite-linkedin, $sprite-twitter, );
+$spritesheet: (512px, 512px, '/dist/img/sprite.png', $spritesheet-sprites, );
+$retina-spritesheet-width: 1024px;
+$retina-spritesheet-height: 1024px;
+$retina-spritesheet-image: 'sprite@2x.png';
+$retina-spritesheet-sprites: ($sprite-facebook-2x, $sprite-linkedin-2x, $sprite-twitter-2x, );
+$retina-spritesheet: (1024px, 1024px, 'sprite@2x.png', $retina-spritesheet-sprites, );
+
+// These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+//
+// The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+$sprite-facebook-group-name: 'sprite-facebook';
+$sprite-facebook-group: ('sprite-facebook', $sprite-facebook, $sprite-facebook-2x, );
+$sprite-linkedin-group-name: 'sprite-linkedin';
+$sprite-linkedin-group: ('sprite-linkedin', $sprite-linkedin, $sprite-linkedin-2x, );
+$sprite-twitter-group-name: 'sprite-twitter';
+$sprite-twitter-group: ('sprite-twitter', $sprite-twitter, $sprite-twitter-2x, );
+$retina-groups: ($sprite-facebook-group, $sprite-linkedin-group, $sprite-twitter-group, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `retina-sprite` mixin sets up rules and a media query for a sprite/retina sprite.
+//   It should be used with a "retina group" variable.
+//
+// The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+//
+// $icon-home-group: ('icon-home', $icon-home, $icon-home-2x, );
+//
+// .icon-home {
+//   @include retina-sprite($icon-home-group);
+// }
+@mixin sprite-background-size($sprite) {
+  $sprite-total-width: nth($sprite, 7);
+  $sprite-total-height: nth($sprite, 8);
+  background-size: $sprite-total-width $sprite-total-height;
+}
+
+@mixin retina-sprite($retina-group) {
+  $normal-sprite: nth($retina-group, 2);
+  $retina-sprite: nth($retina-group, 3);
+  @include sprite($normal-sprite);
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    @include sprite-image($retina-sprite);
+    @include sprite-background-size($normal-sprite);
+  }
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}
+
+// The `retina-sprites` mixin generates a CSS rule and media query for retina groups
+//   This yields the same output as CSS retina template but can be overridden in SCSS
+//
+// @include retina-sprites($retina-groups);
+@mixin retina-sprites($retina-groups) {
+  @each $retina-group in $retina-groups {
+    $sprite-name: nth($retina-group, 1);
+    .#{$sprite-name} {
+      @include retina-sprite($retina-group);
+    }
+  }
+}
