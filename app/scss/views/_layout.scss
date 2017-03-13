@@ -11,6 +11,7 @@ body {
     font-size: 1.8rem;
     line-height: $line-height-body;
     color: map-get($colors, 'strong-grey');
+    background-color: white;
     @include din('regular');
 }
 
