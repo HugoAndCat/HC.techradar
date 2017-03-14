@@ -94,30 +94,57 @@ function setUpSVG() {
 
     var group = d3.select('g');
 
-    var nodes = group.selectAll('circle')
-                .data(techData)
-                .enter()
-                .append('circle')
-                .attr('cx',  function (node) {
-                    return node.coords[0]; 
-                })
-                .attr('cy', '0')
-                .attr('r', '1%')
-                .style('fill', function() {
-                    // return 'hsl(' + Math.random() * 360 + ',100%,50%)';
-                    return 'hsl(' + 0.2 * 360 + ',100%,50%)';
-                })
-                .text(function (node) {
-                    // console.log(node);
-                    return node.name; 
-                });
+    var elem = group.selectAll('circle')
+                .data(techData);
 
-    console.log(nodes.data());
+    var elemEnter = elem.enter()
+                    .append('a')
+                    .on('mouseover', function(d, i) {
+                        d3.select(this).selectAll('.node-name').style("opacity", 1)
+                    })
+                    .on('mouseleave', function(d, i) {
+                        d3.select(this).selectAll('.node-name').style("opacity", 0)
+                    });
+                    
+                    
+    elemEnter.append('circle')
+                    .style('fill', function() {
+                        // return 'hsl(' + Math.random() * 360 + ',100%,50%)';
+                        return 'hsl(' + 0.2 * 360 + ',100%,50%)';
+                    })
+                    .attr('cx',  function (node) {
+                        return node.coords[0]; 
+                    })
+                    .attr('cy',  function (node) {
+                        return node.coords[1]; 
+                    })
+                    .attr('r', '5px');
+
+                
+    elemEnter.append('text')
+            .attr('class','node-name')
+            .attr('x',  function (node) {
+                return node.coords[0] + 10; 
+            })
+            .attr('y',  function (node) {
+                return node.coords[1] + 10; 
+            })
+            .style("opacity", 0)
+            .text(function (node) {
+                // console.log(node);
+                return  node.name; 
+            })
 }
 
 function buildCoords(status: string, area: string) {
     // this should set the coords of the element based on the area and status
-    const statusMap = ['Hold', 'Trial', 'Assess', 'Adopt', 'Drop'];
+    const statusMap = {
+        'Adopt': [0, 100], 
+        'Assess': [200, 300], 
+        'Trial': [100, 200], 
+        'Hold': [300, 400], 
+        'Drop': [400, 500]
+    };
     // const areaMap = ['Tool', 'Languages and Frameworks', 'Platforms', 'Techniques'];
     const areaMap = {
         'Tool': [0, 90], 
@@ -127,14 +154,22 @@ function buildCoords(status: string, area: string) {
     };
     
 
-    let radial = (statusMap.indexOf(status) * 100); 
+    let radial = statusMap[status][0] + (Math.random() * 100); 
     let quadrant = areaMap[area];
 
+    var theta = Math.random() * 360;
+
+    // theta = pi * theta / 180      // convert to radians.
+    var radius = radial;
+    var centerX = 0;
+    var centerY = 0;
+    var x = centerX + radius * Math.cos(theta);
+    var y = centerY - radius * Math.sin(theta);
 
 
     console.log('quadrant: ', quadrant);
     console.log('radial: ', radial);
 
     // return [radial, quadrant];
-    return [radial,1];
+    return [x,y];
 }
