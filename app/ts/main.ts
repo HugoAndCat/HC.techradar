@@ -13,13 +13,16 @@ interface techNode {
     coords: Array<number>
 }
 
-d3.selectAll('p').style('color', function() {
-  return 'hsl(' + Math.random() * 360 + ',100%,50%)';
-});
+var adoptLength: number = 0;
+var trialLength: number = 0;
+var assessLength: number = 0;
+var holdLength: number = 0;
+var dropLength: number = 0;
 
 $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbSTV5pyUTAQgTH1AZHmIs/od6/public/values?alt=json', function(data) {
     //first row 'title' column
     googleDocData = data.feed.entry;
+    
     for (let i = 0; i < googleDocData.length; i++) {
 
         let coords = buildCoords(googleDocData[i].gsx$status.$t, googleDocData[i].gsx$area.$t);
@@ -32,6 +35,24 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbST
             coords: coords
         }
 
+        switch (obj.status) {
+            case 'Adopt':
+                console.log('adoptLength', adoptLength++);
+                break;
+            case 'Trial':
+                console.log('trialLength', trialLength++);
+                break;
+            case 'Assess':
+                console.log('assessLength', assessLength++);
+                break;
+            case 'Hold':
+                console.log('holdLength', holdLength++);
+                break;
+            case 'Drop':
+                console.log('dropLength', dropLength++);
+                break;
+        }
+
         techData.push(obj);
     }
 
@@ -41,20 +62,42 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbST
 function startApp() {
     // here we go...
     setUpSVG();   
+    addDataPoints();
+    createList();
+}
+
+function createList() {
+
+    let techList = d3.select('#techList').append('ul');
+
+    let techItem = techList.selectAll('li')
+                .data(techData);
+    
+    let techItemEnter = techItem.enter();
+
+
+    techItemEnter.append('li')
+            .classed('tech-item', true)
+            .text(function (node) {
+                // console.log(node);
+                return  node.name; 
+            });
 }
 
 function setUpSVG() {
 
-
-    d3.select('body').append('svg')
+    d3.select('#radar').append('svg')
                     .attr('width', '1000')
                     .attr('height', '1000')
-                    .attr('preserveAspectRatio', 'xMaxYMax meet')
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    .attr("viewBox", "0 0 1000 1000")
+                    //class to make it responsive
+                    .classed("svg-content-responsive", true)
                     .append('circle')
                     .attr('cx', '50%')
                     .attr('cy', '50%')
                     .attr('r', '500')
-                    .style('fill', 'rgba(30,30,30,0.2)')
+                    .style('fill', 'rgba(255,255,255,1)')
                     .text('Drop');
 
     var svg = d3.select('svg');
@@ -90,14 +133,17 @@ function setUpSVG() {
 
     svg.append('g').attr('transform', 'translate(500,500)'); // set the zero point to the middle of radar
 
+    // TODO: Add paths and text for Bands.
 
+}
 
+function addDataPoints() {
     var group = d3.select('g');
 
-    var elem = group.selectAll('circle')
+    var dot = group.selectAll('circle')
                 .data(techData);
 
-    var elemEnter = elem.enter()
+    var dotEnter = dot.enter()
                     .append('a')
                     .on('mouseover', function(d, i) {
                         d3.select(this).selectAll('.node-name').style("opacity", 1)
@@ -107,7 +153,7 @@ function setUpSVG() {
                     });
                     
                     
-    elemEnter.append('circle')
+    dotEnter.append('circle')
                     .style('fill', function() {
                         // return 'hsl(' + Math.random() * 360 + ',100%,50%)';
                         return 'hsl(' + 0.2 * 360 + ',100%,50%)';
@@ -120,23 +166,51 @@ function setUpSVG() {
                     })
                     .attr('r', '5px');
 
-                
-    elemEnter.append('text')
-            .attr('class','node-name')
+           
+
+    var label = group.selectAll('text')
+                .data(techData);
+
+    var labelEnter = label.enter().append('g'); 
+                    
+            
+    // labelEnter.append('rect')
+    //         .attr('width', 100)
+    //         .attr('height', 24)
+    //         .attr('x',  function (node) {
+    //             return node.coords[0] + 10 - 3; 
+    //         })
+    //         .attr('y',  function (node) {
+    //             return node.coords[1] + 10 - 18; 
+    //         })
+    //         .attr('fill','white');
+
+    labelEnter.append('text')
             .attr('x',  function (node) {
                 return node.coords[0] + 10; 
             })
             .attr('y',  function (node) {
                 return node.coords[1] + 10; 
             })
-            .style("opacity", 0)
             .text(function (node) {
                 // console.log(node);
                 return  node.name; 
             })
+   labelEnter.append('text')
+            .attr('x',  function (node) {
+                return node.coords[0] + 10; 
+            })
+            .attr('y',  function (node) {
+                return node.coords[1] + 30; 
+            })
+            .text(function (node) {
+                // console.log(node);
+                return  node.status; 
+            })
 }
 
 function buildCoords(status: string, area: string) {
+    let statusIndex = 0;
     // this should set the coords of the element based on the area and status
     const statusMap = {
         'Adopt': [0, 100], 
@@ -152,24 +226,39 @@ function buildCoords(status: string, area: string) {
         'Platforms': [180,270], 
         'Techniques': [270,360]
     };
-    
 
-    let radial = statusMap[status][0] + (Math.random() * 100); 
-    let quadrant = areaMap[area];
 
-    var theta = Math.random() * 360;
+    switch (status) {
+        case 'Adopt':
+            statusIndex = adoptLength;
+            break;
+        case 'Trial':
+            console.log('trialLength', trialLength++);
+            statusIndex = trialLength;
+            break;
+        case 'Assess':
+            console.log('assessLength', assessLength++);
+            statusIndex = assessLength;
+            break;
+        case 'Hold':
+            console.log('holdLength', holdLength++);
+            statusIndex = holdLength;
+            break;
+        case 'Drop':
+            console.log('dropLength', dropLength++);
+            statusIndex = dropLength;
+            break;
+    }
 
-    // theta = pi * theta / 180      // convert to radians.
+    let radial = statusMap[status][0] + 50; 
+
+    var theta = 360/statusIndex;
+
     var radius = radial;
     var centerX = 0;
     var centerY = 0;
     var x = centerX + radius * Math.cos(theta);
     var y = centerY - radius * Math.sin(theta);
 
-
-    console.log('quadrant: ', quadrant);
-    console.log('radial: ', radial);
-
-    // return [radial, quadrant];
     return [x,y];
 }
