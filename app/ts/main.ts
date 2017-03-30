@@ -20,11 +20,11 @@ var holdLength: number = 0;
 var dropLength: number = 0;
 
 
-var adoptIndex: number = 1;
-var trialIndex: number = 1;
-var assessIndex: number = 1;
-var holdIndex: number = 1;
-var dropIndex: number = 1;
+var adoptIndex: number = 0;
+var trialIndex: number = 0;
+var assessIndex: number = 0;
+var holdIndex: number = 0;
+var dropIndex: number = 0;
 
 $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbSTV5pyUTAQgTH1AZHmIs/1/public/full?alt=json', function(data) {
     //first row 'title' column
@@ -276,7 +276,6 @@ function buildCoords(status: string, area: string) {
     
     var theta = (360/statusLength) * statusIndex;
 
-    // debugger;
     var radius = radial;
     var centerX = 0;
     var centerY = 0;
