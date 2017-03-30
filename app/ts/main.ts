@@ -19,23 +19,19 @@ var assessLength: number = 0;
 var holdLength: number = 0;
 var dropLength: number = 0;
 
+
+var adoptIndex: number = 1;
+var trialIndex: number = 1;
+var assessIndex: number = 1;
+var holdIndex: number = 1;
+var dropIndex: number = 1;
+
 $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbSTV5pyUTAQgTH1AZHmIs/1/public/full?alt=json', function(data) {
     //first row 'title' column
     googleDocData = data.feed.entry;
-    
+
     for (let i = 0; i < googleDocData.length; i++) {
-
-        let coords = buildCoords(googleDocData[i].gsx$status.$t, googleDocData[i].gsx$area.$t);
-        // create a new object for each 
-        let obj: techNode = {
-            description: googleDocData[i].gsx$description.$t,
-            name: googleDocData[i].gsx$technologyname.$t,
-            status: googleDocData[i].gsx$status.$t,
-            area: googleDocData[i].gsx$area.$t,
-            coords: coords
-        }
-
-        switch (obj.status) {
+        switch (googleDocData[i].gsx$status.$t) {
             case 'Adopt':
                 console.log('adoptLength', adoptLength++);
                 break;
@@ -51,6 +47,19 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbST
             case 'Drop':
                 console.log('dropLength', dropLength++);
                 break;
+        }
+    }
+    
+    for (let i = 0; i < googleDocData.length; i++) {
+
+        let coords = buildCoords(googleDocData[i].gsx$status.$t, googleDocData[i].gsx$area.$t);
+        // create a new object for each 
+        let obj: techNode = {
+            description: googleDocData[i].gsx$description.$t,
+            name: googleDocData[i].gsx$technologyname.$t,
+            status: googleDocData[i].gsx$status.$t,
+            area: googleDocData[i].gsx$area.$t,
+            coords: coords
         }
 
         techData.push(obj);
@@ -144,27 +153,27 @@ function addDataPoints() {
                 .data(techData);
 
     var dotEnter = dot.enter()
-                    .append('a')
-                    .on('mouseover', function(d, i) {
-                        d3.select(this).selectAll('.node-name').style("opacity", 1)
-                    })
-                    .on('mouseleave', function(d, i) {
-                        d3.select(this).selectAll('.node-name').style("opacity", 0)
-                    });
+                .append('a')
+                .on('mouseover', function(d, i) {
+                    d3.select(this).selectAll('.node-name').style("opacity", 1)
+                })
+                .on('mouseleave', function(d, i) {
+                    d3.select(this).selectAll('.node-name').style("opacity", 0)
+                });
                     
                     
     dotEnter.append('circle')
-                    .style('fill', function() {
-                        // return 'hsl(' + Math.random() * 360 + ',100%,50%)';
-                        return 'hsl(' + 0.2 * 360 + ',100%,50%)';
-                    })
-                    .attr('cx',  function (node) {
-                        return node.coords[0]; 
-                    })
-                    .attr('cy',  function (node) {
-                        return node.coords[1]; 
-                    })
-                    .attr('r', '5px');
+                .style('fill', function() {
+                    // return 'hsl(' + Math.random() * 360 + ',100%,50%)';
+                    return 'hsl(' + 0.2 * 360 + ',100%,50%)';
+                })
+                .attr('cx',  function (node) {
+                    return node.coords[0]; 
+                })
+                .attr('cy',  function (node) {
+                    return node.coords[1]; 
+                })
+                .attr('r', '5px');
 
            
 
@@ -196,22 +205,24 @@ function addDataPoints() {
                 // console.log(node);
                 return  node.name; 
             });
-            
-//    labelEnter.append('text')
-//             .attr('x',  function (node) {
-//                 return node.coords[0] + 10; 
-//             })
-//             .attr('y',  function (node) {
-//                 return node.coords[1] + 30; 
-//             })
-//             .text(function (node) {
-//                 // console.log(node);
-//                 return  node.status; 
-//             })
+
+    //    labelEnter.append('text')
+    //             .attr('x',  function (node) {
+    //                 return node.coords[0] + 10; 
+    //             })
+    //             .attr('y',  function (node) {
+    //                 return node.coords[1] + 30; 
+    //             })
+    //             .text(function (node) {
+    //                 // console.log(node);
+    //                 return  node.status; 
+    //             })
 }
 
 function buildCoords(status: string, area: string) {
     let statusIndex = 0;
+    let statusLength = 0;
+
     // this should set the coords of the element based on the area and status
     const statusMap = {
         'Adopt': [0, 100], 
@@ -231,30 +242,41 @@ function buildCoords(status: string, area: string) {
 
     switch (status) {
         case 'Adopt':
-            statusIndex = adoptLength;
+            statusIndex = adoptIndex;
+            statusLength = adoptLength;
+            adoptIndex++
             break;
         case 'Trial':
             console.log('trialLength', trialLength++);
-            statusIndex = trialLength;
+            statusIndex = trialIndex;
+            statusLength = trialLength;
+            trialIndex++
             break;
         case 'Assess':
             console.log('assessLength', assessLength++);
-            statusIndex = assessLength;
+            statusIndex = assessIndex;
+            statusLength = assessLength;
+            assessIndex++;
             break;
         case 'Hold':
             console.log('holdLength', holdLength++);
-            statusIndex = holdLength;
+            statusIndex = holdIndex;
+            statusLength = holdLength;
+            holdIndex++;
             break;
         case 'Drop':
             console.log('dropLength', dropLength++);
-            statusIndex = dropLength;
+            statusIndex = dropIndex;
+            statusLength = dropLength;
+            dropIndex++
             break;
     }
 
     let radial = statusMap[status][0] + 50; 
+    
+    var theta = (360/statusLength) * statusIndex;
 
-    var theta = 360/statusIndex;
-
+    // debugger;
     var radius = radial;
     var centerX = 0;
     var centerY = 0;
