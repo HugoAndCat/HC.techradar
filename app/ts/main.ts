@@ -19,7 +19,7 @@ var assessLength: number = 0;
 var holdLength: number = 0;
 var dropLength: number = 0;
 
-$.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbSTV5pyUTAQgTH1AZHmIs/od6/public/values?alt=json', function(data) {
+$.getJSON('https://spreadsheets.google.com/feeds/list/1F4FFmFjuyOtW7E2GUrwj4lbSTV5pyUTAQgTH1AZHmIs/1/public/full?alt=json', function(data) {
     //first row 'title' column
     googleDocData = data.feed.entry;
     
@@ -195,18 +195,19 @@ function addDataPoints() {
             .text(function (node) {
                 // console.log(node);
                 return  node.name; 
-            })
-   labelEnter.append('text')
-            .attr('x',  function (node) {
-                return node.coords[0] + 10; 
-            })
-            .attr('y',  function (node) {
-                return node.coords[1] + 30; 
-            })
-            .text(function (node) {
-                // console.log(node);
-                return  node.status; 
-            })
+            });
+            
+//    labelEnter.append('text')
+//             .attr('x',  function (node) {
+//                 return node.coords[0] + 10; 
+//             })
+//             .attr('y',  function (node) {
+//                 return node.coords[1] + 30; 
+//             })
+//             .text(function (node) {
+//                 // console.log(node);
+//                 return  node.status; 
+//             })
 }
 
 function buildCoords(status: string, area: string) {
