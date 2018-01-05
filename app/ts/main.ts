@@ -1,4 +1,5 @@
 import { author } from './author';
+import 'jquery';
 
 import * as d3 from 'd3';
 

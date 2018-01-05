@@ -48,7 +48,11 @@ Run
 
     gulp watch
   
-> NB: This loads browsersync so the development can develop and see changes instantaneously.
+
+#### Local server
+Run 
+    npm run start
+
 
 
 ###Production Environment

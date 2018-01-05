@@ -1,6 +1,5 @@
 //modules required for the tasks to compile
-var browserSync = require('browser-sync').create(),    
-    browserify = require("browserify"),
+var browserify = require("browserify"),
     es = require('event-stream'),
     gulp = require('gulp'),
     prefix = require('gulp-autoprefixer'),
@@ -145,8 +144,7 @@ gulp.task('browserify', ['typescript'], function(done) {
     .pipe(source(basePaths.projPrefix + 'built.js'))
     .pipe(buffer())  
     .pipe(config.production ? plugins.uglify() : gutil.noop())
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(gulp.dest(paths.scripts.dest));
 });
 
 
@@ -161,8 +159,7 @@ gulp.task('styles', function () {
     }))         
     .pipe(config.sourceMaps ? sourcemaps.write(): gutil.noop())
     .pipe(rename(basePaths.projPrefix + 'global.css'))
-    .pipe(gulp.dest(paths.styles.dest))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(gulp.dest(paths.styles.dest));
 });
 
 //Sprite
@@ -217,23 +214,9 @@ gulp.task('copy', function() {
 
 
 //Watch Task
-//Loads browsersync and watches files
-gulp.task('watch', ['serve', 'images', 'styles', 'libs', 'typescript', 'browserify', 'modernizr', 'copy'], function(){
+gulp.task('watch', ['images', 'styles', 'libs', 'typescript', 'browserify', 'modernizr', 'copy'], function(){
   gulp.watch(appFiles.styles, ['styles']);
-  gulp.watch('app/ts/**/*.ts', ['typescript', 'browserify']);
-  gulp.watch('**/*.html', browserSync.reload);   
-});
-
-
-//BrowserSync Task
-//Server
-gulp.task('serve', function() {
-    browserSync.init({
-        server: {
-            server: ["./","app", "dist"],
-            logFileChanges: false
-        }
-    });    
+  gulp.watch('app/ts/**/*.ts', ['typescript', 'browserify']); 
 });
 
 
